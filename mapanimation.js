@@ -1,5 +1,5 @@
 mapboxgl.accessToken =
-  "pk.eyJ1IjoicmV2b3Zpc2lvbnMiLCJhIjoiY2tseTk5dGdmMDF0aDJ1cW02dGNkM2lncSJ9.Fus3W0z4vAH97wNKOEAl4g";
+  "INSERT YOUR PUBLIC ACCESS TOKEN";
 const map = new mapboxgl.Map({
   container: "map", // container ID
   style: "mapbox://styles/revovisions/ckm2hlo8e0vlt18qtn53ulawp", // style URL
