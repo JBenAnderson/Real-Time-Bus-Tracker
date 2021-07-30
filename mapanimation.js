@@ -1,5 +1,5 @@
 mapboxgl.accessToken =
-  "INSERT YOUR PUBLIC ACCESS TOKEN";
+  "pk.eyJ1IjoicmV2b3Zpc2lvbnMiLCJhIjoiY2ttM3VicWVzMGo2czJwbzJvczdoamsybyJ9.reVWjshg2xDsk7zBYHpiaA";
 const map = new mapboxgl.Map({
   container: "map", // container ID
   style: "mapbox://styles/revovisions/ckm2hlo8e0vlt18qtn53ulawp", // style URL
@@ -10,29 +10,29 @@ const map = new mapboxgl.Map({
 
 async function run() {
   // get bus data
-
   const locations = await getBusLocations();
-  // console.log(new Date());
-  console.log(locations);
 
   for (let i = 0; i < locations.length; i++) {
-    let longitude = locations[i].attributes.longitude;
-    let latitude = locations[i].attributes.latitude;
-
-    var marker = new mapboxgl.Marker()
-      .setLngLat([longitude, latitude])
-      .addTo(map);
+    const marker = new mapboxgl.Marker();
+    const longitude = locations[i].attributes.longitude;
+    const latitude = locations[i].attributes.latitude;
+    marker.setLngLat([longitude, latitude]);
+    marker.addTo(map);
+    marker.setPopup(new mapboxgl.Popup().setHTML(locations[i].id));
   }
-
-  // update markers with timer
-  setTimeout(run, 15000);
 }
 
+setTimeout(() => {
+  run();
+}, 15000);
+
 // Request bus data from MBTA
+
 async function getBusLocations() {
   const url = "https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip";
   const response = await fetch(url);
   const json = await response.json();
+
   return json.data;
 }
 
