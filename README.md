@@ -10,15 +10,21 @@ Using geo-location data from MIT bus routing and api from Mapbox you can create 
 
 ## Usage
 
-App updates every 15 seconds to display bus data. Users can pinch and zoom map to their liking.
+App updates every 7 seconds to display bus data. Users can pinch and zoom map to their liking.
 
 ## Roadmap
 
-Additional features to be done:
-
-- fix bus marker behaviour
-- add support for additional modes of transportation
-- add support for additional cities / campuses
+  **Updated 7/30**
+  -fullscreen fluid window for better viewing and resizing.
+  -zoom defaults fixed.
+  -added popup returning the name of each bus enroute.
+  -increased accuracy with lower fixed interval. 
+  
+  
+Future versions: 
+  -customized markers with improved popup information
+  -ui label displaying more bus data and number of buses active.
+  
 
 ## Notes
 
