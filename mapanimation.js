@@ -1,5 +1,5 @@
-mapboxgl.accessToken =
-  "pk.eyJ1IjoicmV2b3Zpc2lvbnMiLCJhIjoiY2tycG5rbzF4OHEwZTMxbzg1Nnpkd3R5ZSJ9.6ELY0c9jpUyT21w8qSv1qg";
+mapboxgl.accessToken = "INSERT ACCESS TOKEN";
+
 const map = new mapboxgl.Map({
   container: "map", // container ID
   style: "mapbox://styles/revovisions/ckm2hlo8e0vlt18qtn53ulawp", // style URL
@@ -12,27 +12,30 @@ async function run() {
   // get bus data
 
   const locations = await getBusLocations();
+  const busCount = locations.length;
 
-  for (let i = 0; i < locations.length; i++) {
-    if (locations.length !== undefined) {
+  const factory = function () {
+    for (let i = 0; i < busCount; i++) {
       const marker = new mapboxgl.Marker();
       const longitude = locations[i].attributes.longitude;
       const latitude = locations[i].attributes.latitude;
+
       marker.setLngLat([longitude, latitude]);
       marker.addTo(map);
+      console.log("marker(s) added.");
       marker.setPopup(new mapboxgl.Popup().setHTML(locations[i].id));
-    } else {
-      setTimeout(() => marker.remove(), 15000);
+
+      for (let j = 0; j < busCount; j++) {
+        marker.setLngLat([longitude, latitude]);
+        setTimeout(() => marker.remove(), 7000);
+      }
     }
-  }
+  };
+  factory();
 }
-
-setTimeout(() => {
-  getBusLocations();
-
+setInterval(() => {
   run();
-}, 15000);
-
+}, 7000);
 // Request bus data from MBTA
 
 async function getBusLocations() {
@@ -42,5 +45,4 @@ async function getBusLocations() {
 
   return json.data;
 }
-
 run();
